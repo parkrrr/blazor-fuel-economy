@@ -56,7 +56,7 @@
                 </Template>
             </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem=Entry Title="Cost" Property=@nameof(Entry.Cost) FormatString="{0:C}" />
-            <RadzenDataGridColumn TItem=Entry Title="Actions" Filterable=false Sortable=false Width="200px">
+            <RadzenDataGridColumn TItem=Entry Title="Actions" Filterable=false Sortable=false Resizable=false Width="95px">
                 <Template Context=entry>
                     <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(entry)) @onclick:stopPropagation="true" />
                     <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(entry)) @onclick:stopPropagation="true" />
@@ -64,7 +64,6 @@
                 <EditTemplate Context=entry>
                     <RadzenButton Icon=check ButtonStyle=ButtonStyle.Success Variant=Variant.Flat Size=ButtonSize.Medium Click=@((args) => SaveRow(entry)) />
                     <RadzenButton Icon=close ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium class="my-1 ms-1" Click=@((args) => CancelEdit(entry)) />
-                    <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(entry)) />
                 </EditTemplate>
             </RadzenDataGridColumn>
         </Columns>

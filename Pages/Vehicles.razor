@@ -29,7 +29,7 @@
                     <RadzenRequiredValidator Text="Vehicle name is required" Component="VehicleName" Popup="true" />
                 </EditTemplate>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Vehicle Title="Actions" Filterable=false Sortable=false Width="200px">
+            <RadzenDataGridColumn TItem=Vehicle Title="Actions" Filterable=false Sortable=false Resizable=false Width="95px">
                 <Template Context=vehicle>
                     <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(vehicle)) @onclick:stopPropagation="true" />
                     <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(vehicle)) @onclick:stopPropagation="true" />
@@ -37,7 +37,6 @@
                 <EditTemplate Context=vehicle>
                     <RadzenButton Icon=check ButtonStyle=ButtonStyle.Success Variant=Variant.Flat Size=ButtonSize.Medium Click=@((args) => SaveRow(vehicle)) />
                     <RadzenButton Icon=close ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium class="my-1 ms-1" Click=@((args) => CancelEdit(vehicle)) />
-                    <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(vehicle)) />
                 </EditTemplate>
             </RadzenDataGridColumn>
         </Columns>

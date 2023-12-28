@@ -1,10 +1,11 @@
 ﻿@typeparam TItem
 
 <RadzenChart style="height: 50px">
-    <RadzenLineSeries Smooth=true Data=@Data CategoryProperty="TimestampUtc" ValueProperty="Economy" />
+    <RadzenLineSeries Smooth=true Data=@Data  CategoryProperty="TimestampUtc" ValueProperty="Economy" />
     <RadzenValueAxis Visible=false />
     <RadzenLegend Visible=false />
     <RadzenCategoryAxis Visible=false />
+    <RadzenChartTooltipOptions Visible=false />
 </RadzenChart>
 
 @code {
