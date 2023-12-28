@@ -34,7 +34,7 @@ jobs:
     - name: Publish
       run: dotnet publish FuelEconomy.csproj -c Release -o publish --nologo
     - name: Upload Build Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: drop
         path: publish
