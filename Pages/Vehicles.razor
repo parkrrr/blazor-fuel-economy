@@ -1,7 +1,48 @@
-﻿<h3>Vehicles</h3>
+﻿@using FuelEconomy.Model
+@page "/vehicles"
 
+<PageTitle>Vehicles</PageTitle>
 
+<RadzenText TextStyle=TextStyle.H3>Vehicles</RadzenText>
 
-@code {
-
-}
+<RadzenRow>
+    <RadzenButton Text=Add Icon=add Click=@InsertRow Disabled=@(_currentlyEditing != null) />
+</RadzenRow>
+<RadzenRow>
+    <RadzenDataGrid @ref=_grid
+        TItem=Vehicle
+        AllowAlternatingRows=false
+        Data=@_data
+        class=rz-mt-4
+        AllowSorting=true
+        AllowFiltering=true
+        AllowPaging=true
+        AllowColumnResize=true
+        FilterMode=FilterMode.Advanced
+        EditMode=DataGridEditMode.Single
+        RowUpdate=@OnUpdateRow
+        RowCreate=@OnCreateRow
+        Sort=@Reset
+        Page=@Reset
+        Filter=@Reset>
+        <Columns>
+            <RadzenDataGridColumn TItem=Vehicle Title="Name" Property=@nameof(Vehicle.Name)>
+                <EditTemplate Context="vehicle">
+                    <RadzenTextBox @bind-Value="vehicle.Name" Style="width:200px; display: block" Name="VehicleName" />
+                    <RadzenRequiredValidator Text="Vehicle name is required" Component="VehicleName" Popup="true" />
+                </EditTemplate>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem=Vehicle Title="Actions" Filterable=false Sortable=false Width="200px">
+                <Template Context=vehicle>
+                    <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(vehicle)) />
+                    <RadzenButton Icon=delete ButtonStyle =ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(vehicle)) />
+                </Template>
+                <EditTemplate Context=vehicle>
+                    <RadzenButton Icon=check ButtonStyle=ButtonStyle.Success Variant=Variant.Flat Size=ButtonSize.Medium Click=@((args) => SaveRow(vehicle)) />
+                    <RadzenButton Icon=close ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium class="my-1 ms-1" Click=@((args) => CancelEdit(vehicle)) />
+                    <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(vehicle)) />
+                </EditTemplate>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+</RadzenRow>

@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace FuelEconomy.Model
+﻿namespace FuelEconomy.Model
 {
     public class Vehicle
     {
@@ -9,15 +7,23 @@ namespace FuelEconomy.Model
 
         public Vehicle()
         {
+            Id = Guid.NewGuid();
             Name = string.Empty;
         }
 
-        private Vehicle(string name)
+        public override bool Equals(object? obj)
         {
-            Id = Guid.NewGuid();
-            Name = name;
+            if (obj is Vehicle other)
+            {
+                return Id == other.Id;
+            }
+
+            return false;
         }
 
-        public static Vehicle New(string name) => new(name);
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
     }
 }
