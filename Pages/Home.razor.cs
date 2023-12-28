@@ -1,4 +1,5 @@
-﻿using FuelEconomy.Services;
+﻿using FuelEconomy.Model;
+using FuelEconomy.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace FuelEconomy.Pages
@@ -21,6 +22,4 @@ namespace FuelEconomy.Pages
             }
         }
     }
-
-    public record VehicleSummaryModel(string Name, int EntriesCount, decimal? AverageEconomy, decimal? BestEconomy);
 }

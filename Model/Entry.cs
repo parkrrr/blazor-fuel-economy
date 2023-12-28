@@ -8,7 +8,22 @@ namespace FuelEconomy.Model
     {
         public Guid Id { get; set; }
         public Guid VehicleId { get; set; }
-        public DateTimeOffset Timestamp { get; set; }
+
+        private DateTimeOffset _timestamp;
+        public DateTimeOffset Timestamp
+        {
+            get
+            {
+                return _timestamp;
+            }
+            set
+            {
+                _timestamp = value;
+                TimestampUtc = value.UtcDateTime;
+            }
+        }
+
+        public DateTime TimestampUtc { get; private set; }
         public decimal Distance { get; set; }
         public decimal Volume { get; set; }
         public decimal Price { get; set; }

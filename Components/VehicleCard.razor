@@ -37,6 +37,9 @@
             </RadzenText>
         </RadzenColumn>
     </RadzenRow>
+    <RadzenRow>
+        <Sparkline Data=@VehicleSummary.Last10Entries CategoryProperty="TimestampUtc" ValueProperty="Economy" TItem=Entry />
+    </RadzenRow>
 </RadzenCard>
 
 @code {

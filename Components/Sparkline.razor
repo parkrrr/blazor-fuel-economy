@@ -1,0 +1,19 @@
+﻿@typeparam TItem
+
+<RadzenChart style="height: 50px">
+    <RadzenLineSeries Smooth=true Data=@Data CategoryProperty="TimestampUtc" ValueProperty="Economy" />
+    <RadzenValueAxis Visible=false />
+    <RadzenLegend Visible=false />
+    <RadzenCategoryAxis Visible=false />
+</RadzenChart>
+
+@code {
+    [Parameter, EditorRequired]
+    public IEnumerable<TItem> Data { get; set; }
+
+    [Parameter, EditorRequired]
+    public string CategoryProperty { get; set; }
+
+    [Parameter, EditorRequired]
+    public string ValueProperty { get; set; }
+}

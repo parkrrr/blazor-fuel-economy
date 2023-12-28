@@ -1,5 +1,4 @@
 ﻿using FuelEconomy.Model;
-using FuelEconomy.Pages;
 using System.Text.Json;
 
 namespace FuelEconomy.Services
@@ -50,7 +49,9 @@ namespace FuelEconomy.Services
         {
             var entries = Current.Entries.Where(e => e.VehicleId == vehicle.Id);
 
-            var summaryModel = new VehicleSummaryModel(vehicle.Name, entries.Count(), entries.Average(e => e.Economy), entries.Max(e => e.Economy));
+
+            var last10 = entries.OrderBy(e => e.Timestamp).Take(10).ToList();
+            var summaryModel = new VehicleSummaryModel(vehicle.Name, entries.Count(), entries.Average(e => e.Economy), entries.Max(e => e.Economy), last10);
 
             return summaryModel;
         }
