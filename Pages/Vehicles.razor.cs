@@ -52,7 +52,9 @@ namespace FuelEconomy.Pages
 
             if (_data.Contains(vehicle))
             {
+                _data.Remove(vehicle);
                 await VehicleService.RemoveAsync(vehicle);
+                await _grid.Reload();
             }
             else
             {

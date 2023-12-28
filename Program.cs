@@ -1,5 +1,4 @@
 using FuelEconomy;
-using FuelEconomy.Model;
 using FuelEconomy.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
