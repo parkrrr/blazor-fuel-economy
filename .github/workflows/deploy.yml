@@ -32,6 +32,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
+          path: publish
           name: drop
       - name: Setup pages
         uses: actions/configure-pages@v4
@@ -39,7 +40,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'drop'
+          path: 'publish'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
