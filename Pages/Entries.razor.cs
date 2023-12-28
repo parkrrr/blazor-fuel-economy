@@ -118,7 +118,7 @@ namespace FuelEconomy.Pages
             using var reader = new StreamReader(stream);
 
             var newEntries = new List<Entry>();
-            string line;
+            string? line;
             while ((line = await reader.ReadLineAsync()) != null)
             {
                 var fields = line.Split(',');
