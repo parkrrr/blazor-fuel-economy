@@ -1,6 +1,6 @@
 ﻿@using FuelEconomy.Model
 @using FuelEconomy.Pages
-<RadzenCard Variant=Variant.Flat Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
+<RadzenCard Variant=Variant.Flat Class="rz-mx-auto" Style="max-width: 420px">
     <RadzenRow RowGap="0">
         <RadzenColumn SizeSM="4">
             <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Name</RadzenText>
@@ -38,7 +38,7 @@
         </RadzenColumn>
     </RadzenRow>
     <RadzenRow>
-        <Sparkline Data=@VehicleSummary.Last10Entries CategoryProperty="TimestampUtc" ValueProperty="Economy" TItem=Entry />
+        <Sparkline Data=@VehicleSummary.Last10Entries ValueProperty="Economy" TItem=EntrySparklineModel />
     </RadzenRow>
 </RadzenCard>
 

@@ -50,7 +50,7 @@ namespace FuelEconomy.Services
             var entries = Current.Entries.Where(e => e.VehicleId == vehicle.Id);
 
 
-            var last10 = entries.OrderBy(e => e.Timestamp).Take(10).ToList();
+            var last10 = entries.OrderBy(e => e.Timestamp).Take(20).Select((e, i) => new EntrySparklineModel(i, e.Economy)).ToList();
             var summaryModel = new VehicleSummaryModel(vehicle.Name, entries.Count(), entries.Average(e => e.Economy), entries.Max(e => e.Economy), last10);
 
             return summaryModel;

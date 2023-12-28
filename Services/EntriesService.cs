@@ -41,5 +41,20 @@ namespace FuelEconomy.Services
             state.Entries.Remove(entry);
             await _appStateService.SetAsync(state);
         }
+
+        public async Task ImportAsync(Guid vehicleId, IEnumerable<Entry> entries)
+        {
+            var state = _appStateService.Current;
+
+            var existingEntries = state.Entries.Where(e => e.VehicleId == vehicleId).ToList();
+            foreach (var entry in existingEntries)
+            {
+                state.Entries.Remove(entry);
+            }
+
+            state.Entries.AddRange(entries);
+
+            await _appStateService.SetAsync(state);
+        }
     }
 }
