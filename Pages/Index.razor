@@ -1,0 +1,11 @@
+﻿@page "/"
+
+@code {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/home");
+    }
+}
