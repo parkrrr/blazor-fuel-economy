@@ -4,7 +4,7 @@
     {
         public int Version { get; set; }
         public List<Vehicle> Vehicles { get; set; } = [];
-        public List<FuelEntry> FuelEntries { get; set; } = [];
+        public List<Entry> Entries { get; set; } = [];
 
         public AppState Increment()
         {

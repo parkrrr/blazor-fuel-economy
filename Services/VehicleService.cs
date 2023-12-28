@@ -1,4 +1,5 @@
 ﻿using FuelEconomy.Model;
+using FuelEconomy.Pages;
 
 namespace FuelEconomy.Services
 {

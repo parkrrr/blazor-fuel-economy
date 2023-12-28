@@ -1,5 +1,13 @@
 ﻿@page "/"
+@using FuelEconomy.Components
 
 <PageTitle>Home</PageTitle>
 
 <RadzenText TextStyle="TextStyle.H1">Fuel Economy</RadzenText>
+
+<RadzenStack Orientation=Orientation.Horizontal>
+    @foreach (var vehicle in _vehicleSummaries)
+    {
+        <VehicleCard VehicleSummary=vehicle />
+    }
+</RadzenStack>

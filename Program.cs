@@ -12,6 +12,7 @@ builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.H
 builder.Services.AddSingleton<LocalStorageService>();
 builder.Services.AddSingleton<AppStateService>();
 builder.Services.AddSingleton<VehicleService>();
+builder.Services.AddSingleton<EntriesService>();
 builder.Services.AddRadzenComponents();
 
 var built = builder.Build();
