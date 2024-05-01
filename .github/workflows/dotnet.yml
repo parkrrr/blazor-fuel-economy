@@ -25,6 +25,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Update base URL
+      shell: pwsh
       run: .\Update-Href.ps1
     - name: Build
       run: dotnet build --no-restore
