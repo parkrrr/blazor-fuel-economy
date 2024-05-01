@@ -34,11 +34,6 @@ jobs:
         with:
           path: publish
           name: drop
-      - name: Update base href
-        uses: SteveSandersonMS/ghaction-rewrite-base-href@v1.1.0
-        with:
-          html_path: 'publish/wwwroot/index.html'
-          base_href: '/blazor-fuel-economy/'
       - name: Setup pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

@@ -15,7 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="Update-Href.ps1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="PowerShell ./Update-Href.ps1" />
+  </Target>
 
 </Project>

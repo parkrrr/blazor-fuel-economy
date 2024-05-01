@@ -1,0 +1,1 @@
+(Get-Content wwwroot/index.html).Replace('<base href="/" />', '<base href="/blazor-fuel-economy/" />') | Set-Content wwwroot/index.html
