@@ -24,6 +24,8 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Update base URL
+      run: .\Update-Href.ps1
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
