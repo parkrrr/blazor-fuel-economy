@@ -26,7 +26,7 @@
                     Page=@Reset
                     Filter=@Reset>
         <Columns>
-            <RadzenDataGridColumn TItem=Entry Title="Date" Property=@nameof(Entry.Timestamp)>
+            <RadzenDataGridColumn TItem=Entry Title="Date" Property=@nameof(Entry.Timestamp) SortOrder=SortOrder.Descending FormatString="{0:d}">
                 <EditTemplate Context="entry">
                     <RadzenDatePicker @bind-Value="entry.Timestamp" Name="Date" />
                     <RadzenRequiredValidator Text="Time stamp is required" Component="Date" Popup="true" />
