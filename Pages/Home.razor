@@ -8,8 +8,8 @@
 @if (_vehicleSummaries != null && _vehicleSummaries.Count == 0)
 {
     <RadzenStack Orientation="Orientation.Horizontal">
-        <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add new vehicle" Click=@AddNewVehicle />
-        <RadzenButton Icon="insights" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add example vehicle" />
+        <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add new vehicle" Click=@AddNewVehicle Disabled=@_loadingExampleData />
+        <RadzenButton Icon="insights" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add example vehicle" Click=@AddExampleVehicle IsBusy=@_loadingExampleData BusyText="Importing..." />
     </RadzenStack>
 }
 else if (_vehicleSummaries != null)
