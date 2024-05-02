@@ -9,7 +9,6 @@
     <RadzenStack Orientation=Orientation.Horizontal>
         <RadzenDropDown TValue=Vehicle Value=@_selectedVehicle ValueChanged=OnVehicleChange Data=@_vehicles TextProperty=@nameof(Vehicle.Name) Style="width:200px; display: block" Name="Vehicle" />
         <RadzenButton Text=Add Icon=add Click=@(() => InsertRow(_selectedVehicle)) Disabled=@(_currentlyEditing != null || _selectedVehicle == null) />
-<InputFile OnChange="@LoadFiles" auto />
     </RadzenStack>
 </RadzenRow>
 <RadzenRow>

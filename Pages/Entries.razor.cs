@@ -1,10 +1,7 @@
 ﻿using FuelEconomy.Model;
 using FuelEconomy.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Radzen.Blazor;
-using Radzen.Blazor.Rendering;
-using System.Globalization;
 
 namespace FuelEconomy.Pages
 {
@@ -103,37 +100,7 @@ namespace FuelEconomy.Pages
         {
             await base.OnInitializedAsync();
 
-            //_data = EntriesService.Get();
             _vehicles = VehicleService.Get();
-        }
-
-        private async Task LoadFiles(InputFileChangeEventArgs e)
-        {
-            if (_selectedVehicle == null)
-            {
-                return;
-            }
-
-            using var stream = e.File.OpenReadStream();
-            using var reader = new StreamReader(stream);
-
-            var newEntries = new List<Entry>();
-            string? line;
-            while ((line = await reader.ReadLineAsync()) != null)
-            {
-                var fields = line.Split(',');
-                var entry = new Entry(_selectedVehicle)
-                {
-                    Timestamp = DateTime.Parse(fields[0]),
-                    Distance = decimal.Parse(fields[1]),
-                    Volume = decimal.Parse(fields[2]),
-                    Price = decimal.Parse(fields[3], NumberStyles.Currency)
-                };
-                newEntries.Add(entry);
-            }
-
-            await EntriesService.ImportAsync(_selectedVehicle.Id, newEntries);
-            _data = EntriesService.Get(_selectedVehicle);
         }
     }
 }
