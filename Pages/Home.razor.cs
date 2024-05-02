@@ -9,6 +9,9 @@ namespace FuelEconomy.Pages
         [Inject]
         public AppStateService AppStateService { get; set; } = null!;
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } = null!;
+
         private List<VehicleSummaryModel> _vehicleSummaries = new();
 
         protected override void OnInitialized()
@@ -20,6 +23,11 @@ namespace FuelEconomy.Pages
             {
                 _vehicleSummaries.Add(AppStateService.GetSummary(vehicle));
             }
+        }
+
+        private void AddNewVehicle()
+        {
+            NavigationManager.NavigateTo("vehicles?adding=true");
         }
     }
 }

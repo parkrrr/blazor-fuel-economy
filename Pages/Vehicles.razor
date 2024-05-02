@@ -25,7 +25,7 @@
         <Columns>
             <RadzenDataGridColumn TItem=Vehicle Title="Name" Property=@nameof(Vehicle.Name)>
                 <EditTemplate Context="vehicle">
-                    <RadzenTextBox @bind-Value="vehicle.Name" Style="width:200px; display: block" Name="VehicleName" />
+                    <RadzenTextBox @bind-Value="vehicle.Name" Style="width:200px; display: block" Name="VehicleName" @ref=_newVehicleTextBox />
                     <RadzenRequiredValidator Text="Vehicle name is required" Component="VehicleName" Popup="true" />
                 </EditTemplate>
             </RadzenDataGridColumn>

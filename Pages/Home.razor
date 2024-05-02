@@ -5,9 +5,19 @@
 
 <RadzenText TextStyle="TextStyle.H1">Fuel Economy</RadzenText>
 
-<RadzenStack Orientation=Orientation.Horizontal>
-    @foreach (var vehicle in _vehicleSummaries)
-    {
-        <VehicleCard VehicleSummary=vehicle />
-    }
-</RadzenStack>
+@if (_vehicleSummaries != null && _vehicleSummaries.Count == 0)
+{
+    <RadzenStack Orientation="Orientation.Horizontal">
+        <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add new vehicle" Click=@AddNewVehicle />
+        <RadzenButton Icon="insights" ButtonStyle="ButtonStyle.Secondary" Size="ButtonSize.Large" Text="Add example vehicle" />
+    </RadzenStack>
+}
+else if (_vehicleSummaries != null)
+{
+    <RadzenStack Orientation=Orientation.Horizontal>
+        @foreach (var vehicle in _vehicleSummaries)
+        {
+            <VehicleCard VehicleSummary=vehicle />
+        }
+    </RadzenStack>
+}
