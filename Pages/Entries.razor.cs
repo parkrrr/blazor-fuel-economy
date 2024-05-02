@@ -86,7 +86,7 @@ namespace FuelEconomy.Pages
             _currentlyEditing = null;
         }
 
-        private void OnVehicleChange(Vehicle vehicle)
+        private void OnVehicleChange(Vehicle? vehicle)
         {
             _selectedVehicle = vehicle;
 
@@ -101,6 +101,7 @@ namespace FuelEconomy.Pages
             await base.OnInitializedAsync();
 
             _vehicles = VehicleService.Get();
+            OnVehicleChange(_vehicles.FirstOrDefault());
         }
     }
 }
