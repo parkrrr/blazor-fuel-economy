@@ -42,6 +42,7 @@ namespace FuelEconomy.Pages
 
         async Task SaveRow(Vehicle vehicle)
         {
+            _focusNewVehicleTextBox = false;
             await _grid.UpdateRow(vehicle);
         }
 

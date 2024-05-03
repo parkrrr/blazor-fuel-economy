@@ -37,17 +37,25 @@ namespace FuelEconomy.Model
         public Entry() { }
 
         // Calculated properties
-        [JsonIgnore]
-        public decimal? Economy => Distance / Volume;
+        public decimal GetEconomy()
+        {
+            return Distance / Volume;
+        }
 
-        [JsonIgnore]
-        public decimal? Cost => Volume * Price;
+        public decimal GetCost()
+        {
+            return Volume * Price;
+        }
 
-        [JsonIgnore]
-        public decimal? CostPerDistance => Cost / Distance;
+        public decimal GetCostPerDistance()
+        {
+            return GetCost() / Distance;
+        }
 
-        [JsonIgnore]
-        public decimal? CostPerVolume => Cost / Volume;
+        public decimal GetCostPerVolume()
+        {
+            return GetCost() / Volume;
+        }
 
         public override bool Equals(object? obj)
         {

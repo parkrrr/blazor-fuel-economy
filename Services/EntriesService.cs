@@ -12,6 +12,12 @@ namespace FuelEconomy.Services
             return state.Entries.Where(e => e.VehicleId == vehicle.Id).ToList();
         }
 
+        public List<Entry> Get(Guid vehicleId)
+        {
+            var state = _appStateService.Current;
+            return state.Entries.Where(e => e.VehicleId == vehicleId).ToList();
+        }
+
         public async Task AddAsync(Entry entry)
         {
             var state = _appStateService.Current;
@@ -55,6 +61,18 @@ namespace FuelEconomy.Services
             state.Entries.AddRange(entries);
 
             await _appStateService.SetAsync(state);
+        }
+
+        public VehicleSummaryModel GetSummary(Vehicle vehicle)
+        {
+            var state = _appStateService.Current;
+
+            var entries = state.Entries.Where(e => e.VehicleId == vehicle.Id);
+
+            var last10 = entries.OrderBy(e => e.Timestamp).Take(20).Select((e, i) => new EntrySparklineModel(i, e.GetEconomy())).ToList();
+            var summaryModel = new VehicleSummaryModel(vehicle, entries.Count(), entries.Average(e => e.GetEconomy()), entries.Max(e => e.GetEconomy()), last10);
+
+            return summaryModel;
         }
     }
 }

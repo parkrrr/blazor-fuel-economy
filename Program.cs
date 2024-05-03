@@ -13,6 +13,7 @@ builder.Services.AddSingleton<LocalStorageService>();
 builder.Services.AddSingleton<AppStateService>();
 builder.Services.AddSingleton<VehicleService>();
 builder.Services.AddSingleton<EntriesService>();
+builder.Services.AddSingleton<VehicleStatisticsService>();
 builder.Services.AddRadzenComponents();
 
 var built = builder.Build();

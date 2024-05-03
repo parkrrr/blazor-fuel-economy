@@ -13,6 +13,11 @@ namespace FuelEconomy.Services
             return state.Vehicles;
         }
 
+        public Vehicle? Get(Guid Id)
+        {
+            return Get().Where(v => v.Id == Id).FirstOrDefault();
+        }
+
         public async Task AddAsync(Vehicle vehicle)
         {
             var state = _appStateService.Current;

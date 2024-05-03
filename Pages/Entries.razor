@@ -50,12 +50,16 @@
                     <RadzenNumericRangeValidator Min=0  Component="Distance" Popup="true" />
                 </EditTemplate>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Economy" Property=@nameof(Entry.Economy)>
+            <RadzenDataGridColumn TItem=Entry Title="Economy">
                 <Template Context="entry">
-                    @(entry.Volume > 0 ? string.Format("{0:0.0}", entry.Economy) : "∞")
+                    @(entry.Volume > 0 ? string.Format("{0:0.0}", entry.GetEconomy()) : "∞")
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Cost" Property=@nameof(Entry.Cost) FormatString="{0:C}" />
+            <RadzenDataGridColumn TItem=Entry Title="Cost" FormatString="{0:C}">
+                <Template Context="entry">
+                    @string.Format("{0:C}", entry.GetCost())
+                </Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem=Entry Title="Actions" Filterable=false Sortable=false Resizable=false Width="95px">
                 <Template Context=entry>
                     <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(entry)) @onclick:stopPropagation="true" />

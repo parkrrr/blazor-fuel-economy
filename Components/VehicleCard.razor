@@ -1,10 +1,10 @@
 ﻿@using FuelEconomy.Model
 @using FuelEconomy.Pages
-<RadzenCard Variant=Variant.Flat Class="rz-mx-auto" Style="max-width: 420px">
+<RadzenCard Variant=Variant.Flat Class="rz-mx-auto" Style="max-width: 420px;cursor:pointer" @onclick=OnClick>
     <RadzenRow RowGap="0">
         <RadzenColumn SizeSM="4">
             <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Name</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" class="rz-color-on-primary-light"><b>@(VehicleSummary.Name)</b></RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" class="rz-color-on-primary-light"><b>@(VehicleSummary.Vehicle.Name)</b></RadzenText>
             <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Entries</RadzenText>
             <RadzenText TextStyle="TextStyle.Body1" class="rz-color-on-primary-light"><b>@(VehicleSummary.EntriesCount)</b></RadzenText>
         </RadzenColumn>
@@ -45,4 +45,12 @@
 @code {
     [Parameter, EditorRequired]
     public VehicleSummaryModel VehicleSummary { get; set; } = null!;
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+
+    private void OnClick(MouseEventArgs e)
+    {
+        NavigationManager.NavigateTo($"/vehicle/{VehicleSummary.Vehicle.Id}");
+    }
 }
