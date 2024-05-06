@@ -1,0 +1,14 @@
+﻿<RadzenCard Style="position: relative; width:15em;">
+    <RadzenText TextStyle="TextStyle.H6">@Title</RadzenText>
+    <RadzenText TextStyle="TextStyle.H2">@ValueOrDefault</RadzenText>
+</RadzenCard>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string? Value { get; set; }
+
+    private string ValueOrDefault => Value ?? "-";
+}

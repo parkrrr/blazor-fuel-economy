@@ -1,4 +1,5 @@
-﻿@using FuelEconomy.Model
+﻿@using FuelEconomy.Components
+@using FuelEconomy.Model
 @using FuelEconomy.Services
 @using System.Globalization
 @page "/vehicle/{VehicleId:guid}"
@@ -12,24 +13,20 @@ else
     <RadzenRow>
         <h3>@_vehicle.Name</h3>
     </RadzenRow>
-    <RadzenRow>
-        <RadzenStack Orientation="Orientation.Horizontal">
-            <RadzenCard Style="position: relative;">
-                <RadzenText TextStyle="TextStyle.H6">Best Economy</RadzenText>
-                <RadzenText TextStyle="TextStyle.H2" Style="position: absolute; right: 1.5rem; top: 1rem;">@(_vehicleStatisticsModel?.AverageEconomy.ToString("0.0"))</RadzenText>
-                 <RadzenChart Style="width: 100%; height: 120px; margin-bottom: -30px">
-                    <RadzenColumnSeries Data=@Economy ValueProperty="AverageEconomy" CategoryProperty="Month" Title="Economy"  />
-                    <RadzenValueAxis Visible="false" />
-                    <RadzenCategoryAxis Visible="false" />
-                    <RadzenColumnOptions Margin="10" />
-                    <RadzenLegend Visible="false" />
-                    <RadzenChartTooltipOptions Visible="false" />
-                </RadzenChart> 
-            </RadzenCard>
-
+    <RadzenRow class="rz-mb-4">
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
+            <VehicleDetailCard Title="Best Economy" Value=@(_vehicleStatisticsModel?.BestEconomy.ToString("0.0")) />
+            <VehicleDetailCard Title="Median Economy" Value=@(_vehicleStatisticsModel?.MedianEconomy.ToString("0.0")) />
+            <VehicleDetailCard Title="Worst Economy" Value=@(_vehicleStatisticsModel?.WorstEconomy.ToString("0.0")) />
         </RadzenStack>
     </RadzenRow>
-    
+    <RadzenRow>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
+            <VehicleDetailCard Title="Cost/100 Miles" Value=@(_vehicleStatisticsModel?.CostPer100Miles.ToString("C")) />
+            <VehicleDetailCard Title="Average Yearly Miles" Value=@(_vehicleStatisticsModel?.AverageYearlyMiles.ToString("N0")) />
+            <VehicleDetailCard Title="Average Yearly Cost" Value=@(_vehicleStatisticsModel?.AverageYearlyCost.ToString("C")) />
+        </RadzenStack>
+    </RadzenRow>
 }
 
 @code {
@@ -47,7 +44,6 @@ else
 
     private Vehicle? _vehicle { get; set; }
     private VehicleStatisticsModel? _vehicleStatisticsModel { get; set; }
-    private List<MonthGroup>? Economy { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,13 +51,6 @@ else
 
         _vehicle = VehicleService.Get(VehicleId);
         _vehicleStatisticsModel = VehicleStatisticsService.Get(VehicleId);
-
-        Economy = EntriesService.Get(VehicleId)
-                                    .OrderByDescending(entry => entry.Timestamp)
-                                    .Where(entry => entry.TimestampUtc > _vehicleStatisticsModel.LatestDate.AddYears(-1))
-                                    .GroupBy(entry => entry.Timestamp.ToString("MMM", CultureInfo.InvariantCulture))
-                                    .Select(group => new MonthGroup(group.Key, group.Average(group => group.GetEconomy())))
-                                    .ToList();
     }
 
     private record MonthGroup(string Month, decimal? AverageEconomy);
