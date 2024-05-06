@@ -20,12 +20,15 @@ else
             <VehicleDetailCard Title="Worst Economy" Value=@(_vehicleStatisticsModel?.WorstEconomy.ToString("0.0")) />
         </RadzenStack>
     </RadzenRow>
-    <RadzenRow>
+    <RadzenRow class="rz-mb-4">
         <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
             <VehicleDetailCard Title="Cost/100 Miles" Value=@(_vehicleStatisticsModel?.CostPer100Miles.ToString("C")) />
             <VehicleDetailCard Title="Average Yearly Miles" Value=@(_vehicleStatisticsModel?.AverageYearlyMiles.ToString("N0")) />
             <VehicleDetailCard Title="Average Yearly Cost" Value=@(_vehicleStatisticsModel?.AverageYearlyCost.ToString("C")) />
         </RadzenStack>
+    </RadzenRow>
+    <RadzenRow>
+        <EntriesGrid Vehicle=_vehicle />
     </RadzenRow>
 }
 
