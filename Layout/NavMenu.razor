@@ -1,5 +1,32 @@
-﻿<RadzenPanelMenu>
+﻿@using FuelEconomy.Model
+@using FuelEconomy.Services
+<RadzenPanelMenu>
     <RadzenPanelMenuItem Text="Home" Icon="home" Path="home" />
-    <RadzenPanelMenuItem Text="Vehicles" Icon="directions_car" Path="vehicles" />
-    <RadzenPanelMenuItem Text="Entries" Icon="table_view" Path="entries" />
+    <RadzenPanelMenuItem Text="Vehicles" Icon="directions_car" Path="vehicles" Expanded=true>
+        <ChildContent>
+        @foreach (var vehicle in _vehicles)
+        {
+            <RadzenPanelMenuItem Text=@vehicle.Name Icon="directions_car" Path=@($"vehicle/{vehicle.Id}") />
+        }
+        </ChildContent>
+    </RadzenPanelMenuItem>
 </RadzenPanelMenu>
+
+@code {
+    [Inject]
+    public VehicleService VehicleService { get; set; } = null!;
+
+    private List<Vehicle> _vehicles { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        VehicleService.VehiclesChanged += OnVehiclesChanged;
+        _vehicles = VehicleService.Get();
+    }
+
+    private void OnVehiclesChanged(object? sender, VehiclesChangedArgs args)
+    {
+        _vehicles = args.Vehicles;
+        StateHasChanged();
+    }
+}

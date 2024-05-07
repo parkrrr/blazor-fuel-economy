@@ -7,6 +7,8 @@ namespace FuelEconomy.Services
     {
         private readonly AppStateService _appStateService = appStateService;
 
+        public event EventHandler<VehiclesChangedArgs>? VehiclesChanged;
+
         public List<Vehicle> Get()
         {
             var state = _appStateService.Current;
@@ -23,6 +25,8 @@ namespace FuelEconomy.Services
             var state = _appStateService.Current;
             state.Vehicles.Add(vehicle);
             await _appStateService.SetAsync(state);
+
+            VehiclesChanged?.Invoke(this, new VehiclesChangedArgs(state.Vehicles));
         }
 
         public async Task UpdateAsync(Vehicle vehicle)
@@ -39,6 +43,8 @@ namespace FuelEconomy.Services
             state.Vehicles.Add(vehicle);
 
             await _appStateService.SetAsync(state);
+
+            VehiclesChanged?.Invoke(this, new VehiclesChangedArgs(state.Vehicles));
         }
 
         public async Task RemoveAsync(Vehicle vehicle)
@@ -46,6 +52,18 @@ namespace FuelEconomy.Services
             var state = _appStateService.Current;
             state.Vehicles.Remove(vehicle);
             await _appStateService.SetAsync(state);
+
+            VehiclesChanged?.Invoke(this, new VehiclesChangedArgs(state.Vehicles));
         }
+    }
+
+    public class VehiclesChangedArgs : EventArgs
+    {
+        public VehiclesChangedArgs(List<Vehicle> vehicles)
+        {
+            Vehicles = vehicles;
+        }
+
+        public List<Vehicle> Vehicles { get; set; } = new();
     }
 }

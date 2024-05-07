@@ -54,9 +54,9 @@ else
     private Vehicle? _vehicle { get; set; }
     private VehicleStatisticsModel? _vehicleStatisticsModel { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnParametersSet()
     {
-        await base.OnInitializedAsync();
+        base.OnParametersSet();
 
         _vehicle = VehicleService.Get(VehicleId);
         _vehicleStatisticsModel = VehicleStatisticsService.Get(VehicleId);
