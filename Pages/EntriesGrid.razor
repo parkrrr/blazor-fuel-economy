@@ -1,69 +1,64 @@
 ﻿@using FuelEconomy.Model
 
-<RadzenRow>
-    <RadzenStack Orientation=Orientation.Horizontal>
+<RadzenDataGrid @ref=_grid
+                TItem=Entry
+                Data=@_data
+                AllowPaging=true
+                AllowColumnResize=true
+                EditMode=DataGridEditMode.Single
+                RowUpdate=@OnUpdateRow
+                RowCreate=@OnCreateRow
+                Sort=@Reset
+                Page=@Reset
+                Filter=@Reset
+                Responsive=true>
+    <HeaderTemplate>
         <RadzenButton Text=Add Icon=add Click=@(() => InsertRow(Vehicle)) Disabled=@(_currentlyEditing != null) />
-    </RadzenStack>
-</RadzenRow>
-<RadzenRow>
-    <RadzenDataGrid @ref=_grid
-                    TItem=Entry
-                    AllowAlternatingRows=false
-                    Data=@_data
-                   
-                    AllowPaging=true
-                    AllowColumnResize=true
-                    EditMode=DataGridEditMode.Single
-                    RowUpdate=@OnUpdateRow
-                    RowCreate=@OnCreateRow
-                    Sort=@Reset
-                    Page=@Reset
-                    Filter=@Reset>
-        <Columns>
-            <RadzenDataGridColumn TItem=Entry Title="Date" Property=@nameof(Entry.Timestamp) SortOrder=SortOrder.Descending FormatString="{0:d}">
-                <EditTemplate Context="entry">
-                    <RadzenDatePicker @bind-Value="entry.Timestamp" Name="Date" />
-                    <RadzenRequiredValidator Text="Time stamp is required" Component="Date" Popup="true" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Distance" Property=@nameof(Entry.Distance)>
-                <EditTemplate Context="entry">
-                    <RadzenNumeric @bind-Value="entry.Distance" Name="Distance" />
-                    <RadzenNumericRangeValidator Min=0 Component="Distance" Popup="true" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Volume" Property=@nameof(Entry.Volume)>
-                <EditTemplate Context="entry">
-                    <RadzenNumeric @bind-Value="entry.Volume" Name="Volume" />
-                    <RadzenNumericRangeValidator Min=0 Component="Volume" Popup="true" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Price" Property=@nameof(Entry.Price)>
-                <EditTemplate Context="entry">
-                    <RadzenNumeric @bind-Value="entry.Price" Name="Distance" />
-                    <RadzenNumericRangeValidator Min=0  Component="Distance" Popup="true" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Economy">
-                <Template Context="entry">
-                    @(entry.Volume > 0 ? string.Format("{0:0.0}", entry.GetEconomy()) : "∞")
-                </Template>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Cost" FormatString="{0:C}">
-                <Template Context="entry">
-                    @string.Format("{0:C}", entry.GetCost())
-                </Template>
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem=Entry Title="Actions" Filterable=false Sortable=false Resizable=false Width="95px">
-                <Template Context=entry>
-                    <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(entry)) @onclick:stopPropagation="true" />
-                    <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(entry)) @onclick:stopPropagation="true" />
-                </Template>
-                <EditTemplate Context=entry>
-                    <RadzenButton Icon=check ButtonStyle=ButtonStyle.Success Variant=Variant.Flat Size=ButtonSize.Medium Click=@((args) => SaveRow(entry)) />
-                    <RadzenButton Icon=close ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium class="my-1 ms-1" Click=@((args) => CancelEdit(entry)) />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-        </Columns>
-    </RadzenDataGrid>
-</RadzenRow>
+    </HeaderTemplate>
+    <Columns>
+        <RadzenDataGridColumn TItem=Entry Title="Date" Property=@nameof(Entry.Timestamp) SortOrder=SortOrder.Descending FormatString="{0:d}">
+            <EditTemplate Context="entry">
+                <RadzenDatePicker @bind-Value="entry.Timestamp" Name="Date" />
+                <RadzenRequiredValidator Text="Time stamp is required" Component="Date" Popup="true" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Distance" Property=@nameof(Entry.Distance)>
+            <EditTemplate Context="entry">
+                <RadzenNumeric @bind-Value="entry.Distance" Name="Distance" />
+                <RadzenNumericRangeValidator Min=0 Component="Distance" Popup="true" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Volume" Property=@nameof(Entry.Volume)>
+            <EditTemplate Context="entry">
+                <RadzenNumeric @bind-Value="entry.Volume" Name="Volume" />
+                <RadzenNumericRangeValidator Min=0 Component="Volume" Popup="true" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Price" Property=@nameof(Entry.Price)>
+            <EditTemplate Context="entry">
+                <RadzenNumeric @bind-Value="entry.Price" Name="Distance" />
+                <RadzenNumericRangeValidator Min=0 Component="Distance" Popup="true" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Economy">
+            <Template Context="entry">
+                @(entry.Volume > 0 ? string.Format("{0:0.0}", entry.GetEconomy()) : "∞")
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Cost" FormatString="{0:C}">
+            <Template Context="entry">
+                @string.Format("{0:C}", entry.GetCost())
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem=Entry Title="Actions" Filterable=false Sortable=false Resizable=false Width="95px">
+            <Template Context=entry>
+                <RadzenButton Icon=edit ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium Click=@(args => EditRow(entry)) @onclick:stopPropagation="true" />
+                <RadzenButton Icon=delete ButtonStyle=ButtonStyle.Danger Variant=Variant.Flat Shade=Shade.Lighter Size=ButtonSize.Medium class="my-1 ms-1" Click=@(args => DeleteRow(entry)) @onclick:stopPropagation="true" />
+            </Template>
+            <EditTemplate Context=entry>
+                <RadzenButton Icon=check ButtonStyle=ButtonStyle.Success Variant=Variant.Flat Size=ButtonSize.Medium Click=@((args) => SaveRow(entry)) />
+                <RadzenButton Icon=close ButtonStyle=ButtonStyle.Light Variant=Variant.Flat Size=ButtonSize.Medium class="my-1 ms-1" Click=@((args) => CancelEdit(entry)) />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
