@@ -14,18 +14,24 @@ else
         <h3>@_vehicle.Name</h3>
     </RadzenRow>
     <RadzenRow class="rz-mb-4">
-        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Best Economy" Value=@(_vehicleStatisticsModel?.BestEconomy.ToString("0.0")) />
+        </RadzenColumn>
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Median Economy" Value=@(_vehicleStatisticsModel?.MedianEconomy.ToString("0.0")) />
+        </RadzenColumn>
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Worst Economy" Value=@(_vehicleStatisticsModel?.WorstEconomy.ToString("0.0")) />
-        </RadzenStack>
-    </RadzenRow>
-    <RadzenRow class="rz-mb-4">
-        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
+        </RadzenColumn>
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Cost/100 Miles" Value=@(_vehicleStatisticsModel?.CostPer100Miles.ToString("C")) />
+        </RadzenColumn>
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Average Yearly Miles" Value=@(_vehicleStatisticsModel?.AverageYearlyMiles.ToString("N0")) />
+        </RadzenColumn>
+        <RadzenColumn SizeXL="2" SizeSM="4" SizeXS="6">
             <VehicleDetailCard Title="Average Yearly Cost" Value=@(_vehicleStatisticsModel?.AverageYearlyCost.ToString("C")) />
-        </RadzenStack>
+        </RadzenColumn>
     </RadzenRow>
     <RadzenRow>
         <EntriesGrid Vehicle=_vehicle />
