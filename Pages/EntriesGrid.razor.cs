@@ -19,7 +19,6 @@ namespace FuelEconomy.Pages
         private RadzenDataGrid<Entry> _grid = null!;
 
         private List<Entry> _data = new();
-        private List<Vehicle> _vehicles = new();
 
         private Entry? _currentlyEditing;
 
@@ -85,24 +84,6 @@ namespace FuelEconomy.Pages
         {
             await EntriesService.AddAsync(entry);
             _currentlyEditing = null;
-        }
-
-        private void OnVehicleChange(Vehicle? vehicle)
-        {
-            Vehicle = vehicle;
-
-            if (Vehicle != null)
-            {
-                _data = EntriesService.Get(Vehicle);
-            }
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-
-            _vehicles = VehicleService.Get();
-            OnVehicleChange(_vehicles.FirstOrDefault());
         }
     }
 }
