@@ -85,5 +85,15 @@ namespace FuelEconomy.Pages
             await EntriesService.AddAsync(entry);
             _currentlyEditing = null;
         }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (Vehicle != null)
+            {
+                _data = EntriesService.Get(Vehicle);
+            }
+        }
     }
 }
