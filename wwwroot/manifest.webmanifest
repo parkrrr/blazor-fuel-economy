@@ -2,7 +2,7 @@
   "name": "FuelEconomy",
   "short_name": "FuelEconomy",
   "id": "./",
-  "scope": "https://parkrrr.github.io/blazor-fuel-economy/"
+  "scope": "https://parkrrr.github.io/blazor-fuel-economy/",
   "display": "standalone",
   "background_color": "#38474e",
   "theme_color": "#03173d",
