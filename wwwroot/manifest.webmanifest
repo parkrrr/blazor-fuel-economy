@@ -3,18 +3,19 @@
   "short_name": "FuelEconomy",
   "id": "./",
   "scope": "https://parkrrr.github.io/blazor-fuel-economy/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#38474e",
   "theme_color": "#03173d",
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
