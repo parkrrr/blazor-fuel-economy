@@ -22,6 +22,8 @@ namespace FuelEconomy.Pages
 
         private Entry? _currentlyEditing;
 
+        private bool IsEditing => _currentlyEditing != null;
+
         void Reset()
         {
             _currentlyEditing = null;
