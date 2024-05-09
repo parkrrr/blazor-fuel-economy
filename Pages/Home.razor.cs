@@ -1,17 +1,12 @@
 ﻿using FuelEconomy.Model;
 using FuelEconomy.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using System.Globalization;
-using System.Xml.Xsl;
 
 namespace FuelEconomy.Pages
 {
     public partial class Home
     {
-        [Inject]
-        public AppStateService AppStateService { get; set; } = null!;
-
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
 
@@ -41,10 +36,10 @@ namespace FuelEconomy.Pages
 
         private void LoadVehicleSummaries()
         {
-            var vehicles = AppStateService.Current.Vehicles.Take(4);
+            var vehicles = VehicleService.Get();
             foreach (var vehicle in vehicles)
             {
-                _vehicleSummaries.Add(AppStateService.GetSummary(vehicle));
+                _vehicleSummaries.Add(VehicleService.GetSummary(vehicle));
             }
         }
 

@@ -55,6 +55,23 @@ namespace FuelEconomy.Services
 
             VehiclesChanged?.Invoke(this, new VehiclesChangedArgs(state.Vehicles));
         }
+
+        public VehicleSummaryModel GetSummary(Vehicle vehicle)
+        {
+            var state = _appStateService.Current;
+
+            var entries = state.Entries.Where(e => e.VehicleId == vehicle.Id).ToList();
+
+            if (entries.Count == 0)
+            {
+                return new VehicleSummaryModel(vehicle, 0, null, null, new List<EntrySparklineModel>());
+            }
+
+            var last10 = entries.OrderBy(e => e.Timestamp).Take(20).Select((e, i) => new EntrySparklineModel(i, e.GetEconomy())).ToList();
+            var summaryModel = new VehicleSummaryModel(vehicle, entries.Count(), entries.Average(e => e.GetEconomy()), entries.Max(e => e.GetEconomy()), last10);
+
+            return summaryModel;
+        }
     }
 
     public class VehiclesChangedArgs : EventArgs
