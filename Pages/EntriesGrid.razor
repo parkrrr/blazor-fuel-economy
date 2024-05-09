@@ -18,25 +18,25 @@
     <Columns>
         <RadzenDataGridColumn TItem=Entry Title="Date" Property=@nameof(Entry.Timestamp) SortOrder=SortOrder.Descending FormatString="{0:d}">
             <EditTemplate Context="entry">
-                <RadzenDatePicker @bind-Value="entry.Timestamp" Name="Date" />
+                <RadzenDatePicker @bind-Value="entry.Timestamp" Name="Date" Style="width: 100%" />
                 <RadzenRequiredValidator Text="Time stamp is required" Component="Date" Popup="true" />
             </EditTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem=Entry Title="Distance" Property=@nameof(Entry.Distance)>
             <EditTemplate Context="entry">
-                <RadzenNumeric @bind-Value="entry.Distance" Name="Distance" />
+                <RadzenNumeric @bind-Value="entry.Distance" Name="Distance" Style="width: 100%" />
                 <RadzenNumericRangeValidator Min=0 Component="Distance" Popup="true" />
             </EditTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem=Entry Title="Volume" Property=@nameof(Entry.Volume)>
             <EditTemplate Context="entry">
-                <RadzenNumeric @bind-Value="entry.Volume" Name="Volume" />
+                <RadzenNumeric @bind-Value="entry.Volume" Name="Volume" Style="width: 100%" />
                 <RadzenNumericRangeValidator Min=0 Component="Volume" Popup="true" />
             </EditTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem=Entry Title="Price" Property=@nameof(Entry.Price)>
             <EditTemplate Context="entry">
-                <RadzenNumeric @bind-Value="entry.Price" Name="Distance" />
+                <RadzenNumeric @bind-Value="entry.Price" Name="Distance" Style="width: 100%" />
                 <RadzenNumericRangeValidator Min=0 Component="Distance" Popup="true" />
             </EditTemplate>
         </RadzenDataGridColumn>
