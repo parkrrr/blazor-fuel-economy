@@ -1,6 +1,6 @@
 {
-  "name": "FuelEconomy",
-  "short_name": "FuelEconomy",
+  "name": "Fuel Economy",
+  "short_name": "Fuel Economy",
   "id": "./",
   "scope": "https://parkrrr.github.io/blazor-fuel-economy/",
   "start_url": "https://parkrrr.github.io/blazor-fuel-economy/home",
