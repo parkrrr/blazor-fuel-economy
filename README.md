@@ -2,7 +2,7 @@
 This is a Blazor WebAssembly project that demonstrates how to use the Blazor WebAssembly framework to create a tool that manages fuel economy data for multiple vehicles.
 
 ## Features
-- Offline support
+- ~Offline support~
 - Hosted on GitHub Pages
 
 ## Notes
